@@ -1,0 +1,51 @@
+require 'net/http'
+require 'json'
+require 'geocoder'
+require 'geoloc'
+
+# Получение текущих координат пользователя
+location = Geocoder.search('my ip').first.coordinates
+
+latitude = location[0]
+longitude = location[1]
+location = Geoloc.get_location
+
+latitude = location.latitude
+longitude = location.longitude
+
+puts "Geoicoder: Текущие координаты: #{latitude}, #{longitude}"
+
+location = Geoloc.get_location
+
+latitude = location.latitude
+longitude = location.longitude
+
+puts "Geoloc: Текущие координаты: #{latitude}, #{longitude}"
+
+
+def get_weather(latitude, longitude)
+  api_key = 'YOUR_API_KEY' # Замените YOUR_API_KEY на ваш собственный ключ API OpenWeatherMap
+
+  # Формируем URL запроса с координатами и ключом API
+  url = "https://api.openweathermap.org/data/2.5/weather?lat=#{latitude}&amp;lon=#{longitude}&amp;appid=#{api_key}"
+
+  # Отправляем GET-запрос и получаем ответ
+  response = Net::HTTP.get(URI(url))
+
+  # Преобразуем ответ в объект JSON
+  weather_data = JSON.parse(response)
+
+  # Извлекаем информацию о погоде из объекта JSON
+  temperature = weather_data['main']['temp']
+  description = weather_data['weather'][0]['description']
+
+  puts "Текущая погода:"
+  puts "Температура: #{temperature} K"
+  puts "Описание: #{description}"
+end
+
+# Замените latitude и longitude на ваши реальные координаты
+#latitude = 55.751244
+#longitude = 37.618423
+
+get_weather(latitude, longitude)
