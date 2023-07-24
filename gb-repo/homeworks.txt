@@ -1,1 +1,58 @@
 # Homework reports
+
+# 20230724-0900
+alex@ALEXA200 MINGW64 /d/dev/REPO/gb-hellow (main)
+$ git --version
+git version 2.41.0.windows.3
+
+alex@ALEXA200 MINGW64 /d/dev/REPO/gb-hellow (main)
+$ git config -l
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=openssl
+http.sslcainfo=D:/DEV/Git/mingw64/etc/ssl/certs/ca-bundle.crt
+core.autocrlf=true
+core.fscache=true
+core.symlinks=false
+core.fsmonitor=true
+core.editor="C:\\Program Files\\Notepad++\\notepad++.exe" -multiInst -notabbar -nosession -noPlugin
+pull.rebase=false
+init.defaultbranch=main
+user.email=alexar@live.ru
+user.name=AlexAR
+filter.lfs.required=true
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+color.ui=auto
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+core.symlinks=false
+core.ignorecase=true
+submodule.active=.
+remote.origin.url=https://github.com/alexar-aer/gb-hellow.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
+lfs.repositoryformatversion=0
+
+# 20230725
+
+# 20230726
+
+# 20230727
+
+# 20230728
+
+# 20230729
+
+# 20230730
+
+# 20230731
+
+# 20230801
