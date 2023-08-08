@@ -10,3 +10,5 @@ weights_hidden_to_output = np.random.uniform(-0.5, 0.5, (10,20))           # sec
 bias_input_to_hidden     = np.zeroes((20,1))      # Biases for first layer
 bias_hidden_to_input     = np.zeroes((10,1))      # Biases for second layer
 
+epohs       = 3                                     # Тumber of training stages
+e_loss      =
