@@ -14,11 +14,11 @@ undup_file_name         = "undupled.csv"        # WORK (undupled) FILE
 output_folder           = 'output'              # OUTPUT FOLDER
 output_file_name        = 'report.rep'          # RESULT FILE
 
-header_count            = 2                     # count Header lines + '\n{#smen}'
-header_line             = ''                    # Strings for insert into all result files.
+header_count            = 3                     # count Header lines + '\n{#smen}'
+header_lines             = ''                    # Strings for insert into all result files.
 
-smene_col               = 13                    # Frontol6 field of Num.shifts ака № смены
-date_col                = 02                    # Frontol6 field of DATE
+smena_col               = 13                    # Frontol6 field of Num.shifts ака № смены
+date_col                = 01                    # Frontol6 field of DATE
 cheque_code_col         = 03                    # Frontol6 field of transaction codes
 zreport_cheque_code     = 63                    # Frontol6 transaction code of Z-reports
 
@@ -44,14 +44,15 @@ progress = tqdm(total=total_lines_count, desc=f'Searching for unique lines...') 
 with open(input_file_name, 'r') as input_file:
     for line in input_file:
         line_count += 1
-        if (line_count <= header_count): header_line += line # Save header    next(reader)  # Skip header row
-        # Добавляем строку в множество уникальных строк
-        unique_lines.add(line.strip()) # .split(';')[0])
+        if (line_count < header_count):         # Save header -last line! (shift No)
+            header_lines += line
+
+        unique_lines.add(line.strip())          # Adding a string to a set of uniques
         progress.update(1)
 
 progress.close()
 print('Header:')
-print(header_line, end='')
+print(header_lines, end='')
 print('==================')
 print(f'\nCount:{line_count} lines')
 
@@ -77,74 +78,79 @@ with open(undup_file_name, 'w') as output_file:
 
 
 progress.close()
-print(f'Done copying unique {line_count} lines to {undup_file_name}.')
+print(f'Done copying unique {line_count} lines into {undup_file_name}.')
 
-# Разделение исходного файла в подпапки по годам и месяцам
-year = 0
-month = 0
-day = 0
+# Splitting the source file into subfolders by year, month, and cash shift
+year        = 0
+month       = 0
+day         = 0
+smena       = 0
 print(f'Open source CSV: {undup_file_name}...')
-progress = tqdm(total=line_count, desc=f'Create {output_folder}\{year}\{month}{day} subfolders...')  # Создание прогрессбара с общим количеством шагов
+progress    = tqdm(total=line_count, desc=f'Create {output_folder}\{year}\{month}{day} subfolders...')  # Создание прогрессбара с общим количеством шагов
+
+def lz(v, zfills=2): return str(v).zfill(zfills) # LeadingZero
 
 with open(undup_file_name, 'r') as file:
-    last_year = 0
-    last_month = 0
-    last_day = 0
-    last_smena = 0
+    last_year           = 0
+    last_month          = 0
+    last_day            = 0
+    last_smena          = 0
 
-    line_count = 0
-    years_monts = set()
-    reader = csv.reader(file, delimiter=';')
+    line_count          = 0
+    folders             = set()                 # Set for counting created subfolders
+    reader              = csv.reader(file, delimiter=';')
 
-    for i in range(header_count):
-        next(reader)  # Skip header row
+    for i in range(header_count):               # Skip header rows
+        next(reader)
 
     for row in reader:
-        line_count += 1
-        date_str = row[1]
-        date = datetime.strptime(date_str, "%d.%m.%Y")
-        year = date.year
-        month = date.month
-        day = date.day
-        smena_str = row[13]#номер текущей смены
-        smena = int(smena_str) if smena_str.isdigit() else 0
+        line_count      += 1
+        date_str        = row[date_col]
+        date            = datetime.strptime(date_str, "%d.%m.%Y")
+        year            = date.year
+        month           = date.month
+        day             = date.day
+        smena_str       = row[smena_col]        # Number of the current cash shift
+        smena           = int(smena_str) if smena_str.isdigit() else 0
 
-        year_str = f"{str(year).zfill(4)}\{str(month).zfill(2)}{str(day).zfill(2)}_{str(smena).zfill(4)}"
-        years_monts.add(year_str)
+        # Format folder_str: YYYY\MMDD_SSSS (S = Num.cash shifts)
+        folder_str = str(f'{lz(year, 4)}\{lz(month)}{lz(day)}_{lz(smena, 4)}')
+        folders.add(folder_str)
 
-        folder_path = os.path.join(output_folder, year_str)
+        folder_path     = os.path.join(output_folder, folder_str)
         os.makedirs(folder_path, exist_ok=True)
-        content = row[:]
-        file_path = os.path.join(folder_path, output_file_name)
+        content         = row[:]
+        file_path       = os.path.join(folder_path, output_file_name)
 
         with open(file_path, 'a', encoding='utf-8') as output_file:
             if last_year != year:
                 last_year = year
-                last_month = 0
+                last_month = 0                  # clear month-day-smena counters
                 last_day = 0
                 last_smena = 0
 
             if last_month != month:
                 last_month = month
-                last_day = 0
+                last_day = 0                    # clear day-smena counters
                 last_smena = 0
 
             if last_day != day:
                 last_day = day
                 last_smena = smena
-                output_file.write(header_line)#write header
+                output_file.write(header_lines) # write header
+                output_file.write(f'{smena}\n') # write Num.cash shift
 
             if last_smena != smena:
                 last_day = day
-                output_file.write(header_line)  # write header
-                output_file.write(f'{smena}\n') # write header
                 last_smena = smena
+                output_file.write(header_lines) # write header
+                output_file.write(f'{smena}\n') # write Num.cash shift
 
             output_file.write(';'.join(row))
             output_file.write('\n')
-            progress.desc = f'Create {output_folder}\{year_str} subfolders...'
+            progress.desc = f'Create {output_folder}\{folder_str} subfolders...'
             progress.update(1)
 
 progress.close()
-print(f'Created {len(years_monts)} folders.')
+print(f'Created {len(folders)} folders.')
 print(f'ALL Done {line_count} lines.')
