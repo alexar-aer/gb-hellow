@@ -136,8 +136,8 @@ with open(undup_file_name, 'r') as file:
 
             if last_smena != smena:
                 last_day = day
-                output_file.write(header_line)#write header
-                output_file.write(f'{smena}'\n)#write header
+                output_file.write(header_line)  # write header
+                output_file.write(f'{smena}\n') # write header
                 last_smena = smena
 
             output_file.write(';'.join(row))
