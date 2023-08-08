@@ -1,1 +1,3 @@
-Neuro001/mnist.npz
+*.npz
+*.csv
+*.rar
