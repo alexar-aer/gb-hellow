@@ -6,8 +6,8 @@ import csv
 import os
 from tqdm import tqdm
 
-input_file_name         = "report_.csv"         # SOURCE FILE
-undup_file_name         = "report0.csv"         # WORK (undupled) FILE
+input_file_name         = "result.csv"          # SOURCE FILE
+undup_file_name         = "report1.csv"         # WORK (undupled) FILE
 
 header_count            = 3                     # count Header lines + '\n{#smen}'
 header_lines            = ''                    # Strings for insert into all result files.
@@ -43,10 +43,10 @@ print('Header:')
 print(header_lines, end='')
 print('==================')
 
-progress.desc = f'Copying unique lines...'      # Rename ProgressBar
 lines_count = 0                                 # Reset counter and ProgressBar
-progress.reset()
 progress.total = unique_lines_count
+progress.desc = f'Copying unique lines...'      # Rename ProgressBar
+progress.reset()
 
 # Открываем новый файл для записи
 with open(undup_file_name, 'w') as output_file:

@@ -11,16 +11,15 @@ def lz(v, zfills = 2): return str(v).zfill(zfills) # LeadingZero
 
 def s2i(s = '', default = 0): return int(s) if s.isdigit() else default
 
-undup_file_name         = "report0.csv"         # WORK (undupled) FILE
-output_folder           = 'output0'             # OUTPUT FOLDER
+undup_file_name         = "report1.csv"         # WORK (undupled) FILE
+output_folder           = 'output1'             # OUTPUT FOLDER
 output_file_name        = 'report.csv'          # RESULT FILE
 
 header_count            = 3                     # Count Header lines for SKIPPING
 header_lines            = f'#\n1\n'             # Strings for insert into all result files.
 
-date_col                = 01                    # Frontol6 field of DATE
+date_col                = 1                     # Frontol6 field of DATE
 smene_col               = 13                    # Frontol6 field of Num.shifts ака № смены
-
 
 current_folder = os.getcwd()                    # Checking current work dir
 script_folder = os.path.dirname(os.path.abspath(__file__))
@@ -30,7 +29,7 @@ print(f'Open source CSV: {undup_file_name}...')
 with open(undup_file_name, 'r') as input_file:  # Counting lines in SOURCE
     total_lines_count = sum(1 for _ in input_file)
 
-progress = tqdm(total = total_lines_count, leave = False, unit = 'lines', \
+progress = tqdm(total = total_lines_count, leave = False, unit = ' lines', \
                 desc = f'Create Output folders...') # Create ProgressBar TQDM
 
 with open(undup_file_name, 'r') as source_file:
