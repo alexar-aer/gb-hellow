@@ -67,23 +67,22 @@ progress = tqdm(total=pixels_count*pixels_depth, desc='Generate pixels', ascii=T
 for i in range(pixels_count):
     for z in range(pixels_depth):
         x = rnd(pixels_max_x)
-        y = rnd(pixels_height)
+        y = rnd(pixels_max_y)
         starfield[x,y,z] = get_random_color()
 
-
-    if (pixel_count % 50 == 0): progress.update(50)
+    if (i % 50 == 0): progress.update(50)
 
 
 progress.close()
 print(starfield)
-print(starfield[pixels_max_x-1,pixels_height-1,pixels_depth-1])
+print(starfield[pixels_max_x-1,pixels_max_y-1,pixels_depth-1])
 print(starfield[0,0,0])
 
 
 # Инициализация pygame
 pygame.init()
 
-screen = pygame.display.set_mode((screen_width, screen_height))
+screen = pygame.display.set_mode((screen.width, screen.height))
 
 # Основной цикл программы
 running = True
@@ -96,16 +95,16 @@ while running:
     # Отображение пикселей на экране
 
     for x in range(pixels_max_x):
-        for y in range(pixels_height):
+        for y in range(pixels_max_y):
             #for z in range(depth):
                 color = starfield[x][y][0]
-                pygame.draw.rect(screen, color, (x*star_pad, y*star_pad, star_cell, star_cell))
+                pygame.draw.rect(screen, color, (x*star_default.pad, y*star_default.pad, star_default.cell, star_default.cell))
 
-        randcolor = random.randint(0, star_colors)
+        randcolor = random.randint(0, star_default.colors)
         color = (randcolor,randcolor,randcolor)
 
         i = rnd(pixels_max_x)
-        j = rnd(pixels_height)
+        j = rnd(pixels_max_y)
         starfield[i,j,0] = color
 
     # Обновление экрана
