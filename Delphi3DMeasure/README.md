@@ -5,14 +5,8 @@
 ## Требования
 
 - Delphi 7
-- Библиотека OpenGL15.pas (входит в стандартную поставку Delphi 7)
+- Библиотека dglOpenGL.pas (с сайта https://wiki.delphigl.com/index.php/Archiv:dglOpenGL)
 - Windows (для WGL контекста)
-
-## Установка
-
-1. Скопируйте все файлы в одну директорию
-2. Откройте `Measure3D.dpr` в Delphi 7
-3. Скомпилируйте и запустите проект
 
 ## Функционал
 
