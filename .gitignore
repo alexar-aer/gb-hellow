@@ -1,4 +1,32 @@
-*.npz
-*.csv
-*.rar
-report.rep
+```
+# Delphi/Pascal build artifacts
+*.dcu
+*.bpl
+*.dcp
+*.dsk
+*.dproj.local
+*.identcache
+*.tvsconfig
+*.stat
+
+# Dependencies
+__history/
+
+# Logs and temp files
+*.log
+*.tmp
+*.~*
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+```
