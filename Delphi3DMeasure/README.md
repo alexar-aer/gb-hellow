@@ -2,6 +2,35 @@
 
 Инструмент для измерения 3D-моделей в формате OBJ с использованием OpenGL.
 
+## Структура проекта
+
+### Модули
+
+| Модуль | Файл | Строк | Назначение |
+|--------|------|-------|------------|
+| **uTypes** | uTypes.pas | 60 | Базовые типы данных (TVector3, TVertex, TFace, TPoint3D, TMeasurement) |
+| **uMath** | uMath.pas | 97 | Векторная математика (8 функций: VectorAdd, VectorSub, Distance3D и др.) |
+| **uUtils** | uUtils.pas | 121 | Утилиты загрузки OBJ файлов и парсинга данных |
+| **uRenderer** | uRenderer.pas | 187 | Рендеринг OpenGL (TSceneManager класс, отрисовка модели и измерений) |
+| **uMeasure** | uMeasure.pas | 147 | Логика измерений (TMeasurementManager класс, расчет расстояний, масштабирование) |
+| **uMainForm** | uMainForm.pas + uMainForm.dfm | 125 + 84 | Главная форма приложения, обработка событий UI |
+| **Delphi3DMeasure** | Delphi3DMeasure.dpr | 30 | Главный файл проекта |
+
+### Сторонние библиотеки
+- **dglOpenGL.pas** (20073 строки) - Современный OpenGL биндинг для Delphi
+
+## Статистика кода
+
+| Показатель | Значение |
+|------------|----------|
+| Всего файлов Pascal | 7 |
+| Строк кода (без dglOpenGL) | 737 |
+| Строк кода (с dglOpenGL) | 20810 |
+| Типов данных | 7 |
+| Классов | 3 (TSceneManager, TMeasurementManager, TMainForm) |
+| Функций/Процедур | ~30 |
+| Констант | 4 |
+
 ## Требования
 
 - Delphi 7
