@@ -117,10 +117,9 @@ end;
 
 procedure TMeasurementManager.ExportToTable(ListView: TListView);
 var
-    I                    : Integer;
+    I, Idx               : Integer;
     Item                 : TListItem;
     Dist                 : Single;
-    Column               : TListColumn;
 const
     ColumnsCount         = 4;
     ColumnWidths         : array[0..ColumnsCount] of integer =
@@ -132,10 +131,10 @@ begin
     ListView.Items.Clear;
     ListView.Columns.Clear;
     for i := 0 to ColumnsCount - 1 do begin
-        Column := ListView.Columns.Add;
-        ListView.Column[Column.Index].Caption := ColumnCaptions[i];
+        Idx := ListView.Columns.Add;
+        ListView.Column[Idx].Caption := ColumnCaptions[i];
         //        ListView.Column[i].AutoSize := True;
-        ListView.Column[Column.Index].Width := ColumnWidths[i];
+        ListView.Column[Idx].Width := ColumnWidths[i];
     end;                                //for i
 
     for I := 0 to Length(FPoints) - 2 do begin
@@ -145,9 +144,9 @@ begin
         Item.SubItems.Add(FPoints[I + 1].Caption);
 
         Dist := Distance3D(FPoints[I].Pos, FPoints[I + 1].Pos);
-        Item.SubItems.Add(FormatFixFloat(SetFixFloat(Dist)));
-        Item.SubItems.Add(FormatFixFloat(SetFixFloat(
-            Dist * FScaleFactor)));
+        Item.SubItems.Add(FormatFloat('0.000', Dist));
+        Item.SubItems.Add(FormatFloat('0.000', Dist *
+            FScaleFactor));
     end;
 end;
 

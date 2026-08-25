@@ -19,10 +19,7 @@ uses
   uMath in 'uMath.pas',
   uUtils in 'uUtils.pas',
   uRenderer in 'uRenderer.pas',
-  uMeasure in 'uMeasure.pas',
-  uLocalization in 'uLocalization.pas',
-  uLangEnglish in 'uLangEnglish.pas',
-  uLangRussian in 'uLangRussian.pas';
+  uMeasure in 'uMeasure.pas';
 
 {$R *.res}
 

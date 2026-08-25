@@ -29,8 +29,8 @@ type
         FracPart: Integer;
     end;
 
-function SetVector3(const aX, aY, aZ: Single): TVector3;
-/// <summary>Сложение векторов</summary>
+function SetVector3D: TVector3D;
+    /// <summary>Сложение векторов</summary>
 function VectorAdd(const A, B: TVector3): TVector3;
 /// <summary>Вычитание векторов</summary>
 function VectorSub(const A, B: TVector3): TVector3;
@@ -55,13 +55,6 @@ function SetFixFloat(const AValue: Extended): TFixFloat;
 function DegToRad(const Degrees: Single): Single;
 
 implementation
-
-function SetVector3(const aX, aY, aZ: Single): TVector3;
-begin
-    Result.X := Ax;
-    Result.Y := Ay;
-    Result.Z := Az;
-end;
 
 function VectorAdd(const A, B: TVector3): TVector3;
 begin

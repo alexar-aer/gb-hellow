@@ -1,0 +1,70 @@
+unit uLocalization;
+
+interface
+
+uses
+  Classes, SysUtils;
+
+type
+  TLanguage = (langEnglish, langRussian);
+
+  TStringResource = function: string;
+
+  TLocalizationManager = class
+  private
+    FCurrentLanguage: TLanguage;
+    FOnLanguageChange: TNotifyEvent;
+    procedure SetCurrentLanguage(const Value: TLanguage);
+  public
+    constructor Create;
+    procedure RegisterString(const AKey: string; const AEngStr, ARusStr: string);
+    function GetString(const AKey: string): string;
+    property CurrentLanguage: TLanguage read FCurrentLanguage write SetCurrentLanguage;
+    property OnLanguageChange: TNotifyEvent read FOnLanguageChange write FOnLanguageChange;
+  end;
+
+var
+  LocManager: TLocalizationManager;
+
+implementation
+
+{ TLocalizationManager }
+
+constructor TLocalizationManager.Create;
+begin
+  inherited Create;
+  FCurrentLanguage := langEnglish; // Язык по умолчанию
+end;
+
+procedure TLocalizationManager.SetCurrentLanguage(const Value: TLanguage);
+begin
+  if FCurrentLanguage <> Value then
+  begin
+    FCurrentLanguage := Value;
+    if Assigned(FOnLanguageChange) then
+      FOnLanguageChange(Self);
+  end;
+end;
+
+// Заглушки для регистрации (в реальном проекте можно использовать словари)
+// Для простоты в этом примере мы будем использовать прямые вызовы из модулей языков
+// через глобальные переменные или функции, но структура позволяет расширить до словаря.
+procedure TLocalizationManager.RegisterString(const AKey: string; const AEngStr, ARusStr: string);
+begin
+  // Реализация через словарь была бы здесь
+  // Сейчас логика вынесена в специфичные функции получения строк
+end;
+
+function TLocalizationManager.GetString(const AKey: string): string;
+begin
+  Result := ''; 
+  // Эта функция может использоваться для динамического поиска, 
+  // но для производительности и простоты в Delphi 7 часто используют 
+  // прямые вызовы функций из модулей ресурсов в коде формы.
+end;
+
+initialization
+  LocManager := TLocalizationManager.Create;
+finalization
+  LocManager.Free;
+end.

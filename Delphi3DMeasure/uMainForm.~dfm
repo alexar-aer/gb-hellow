@@ -1,9 +1,9 @@
 object MainForm: TMainForm
-  Left = 322
-  Top = 97
+  Left = 343
+  Top = 157
   Width = 1024
-  Height = 607
-  Caption = '3D Measure - '#1048#1079#1084#1077#1088#1077#1085#1080#1077' 3D '#1084#1086#1076#1077#1083#1077#1081
+  Height = 768
+  Caption = '3D Measure - Измерение 3D моделей'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object MainForm: TMainForm
     Left = 0
     Top = 0
     Width = 769
-    Height = 548
+    Height = 709
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -28,7 +28,7 @@ object MainForm: TMainForm
     Left = 769
     Top = 0
     Width = 239
-    Height = 548
+    Height = 709
     Align = alRight
     Columns = <>
     TabOrder = 1
@@ -38,7 +38,7 @@ object MainForm: TMainForm
     Left = 48
     Top = 48
     object FileMenu: TMenuItem
-      Caption = '&'#1060#1072#1081#1083
+      Caption = '&Файл'
       object Language1: TMenuItem
         Caption = 'Language'
         object English1: TMenuItem
@@ -52,45 +52,45 @@ object MainForm: TMainForm
         end
       end
       object LoadMenuItem: TMenuItem
-        Caption = '&'#1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1084#1086#1076#1077#1083#1100'...'
+        Caption = '&Загрузить модель...'
         OnClick = LoadMenuItemClick
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object ExitMenuItem: TMenuItem
-        Caption = #1042'&'#1099#1093#1086#1076
+        Caption = 'В&ыход'
         OnClick = ExitMenuItemClick
       end
     end
     object ToolsMenu: TMenuItem
-      Caption = '&'#1048#1085#1089#1090#1088#1091#1084#1077#1085#1090#1099
+      Caption = '&Инструменты'
       object AddPointMenuItem: TMenuItem
-        Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100' '#1090#1086#1095#1082#1091
+        Caption = '&Добавить точку'
       end
       object ClearMenuItem: TMenuItem
-        Caption = '&'#1054#1095#1080#1089#1090#1080#1090#1100' '#1074#1089#1077
+        Caption = '&Очистить все'
         OnClick = ClearMenuItemClick
       end
       object N2: TMenuItem
         Caption = '-'
       end
       object ExportMenuItem: TMenuItem
-        Caption = '&'#1069#1082#1089#1087#1086#1088#1090' '#1076#1072#1085#1085#1099#1093'...'
+        Caption = '&Экспорт данных...'
         OnClick = ExportMenuItemClick
       end
     end
     object HelpMenu: TMenuItem
-      Caption = '&'#1057#1087#1088#1072#1074#1082#1072
+      Caption = '&Справка'
     end
   end
   object OpenDialog1: TOpenDialog
-    Filter = 'OBJ '#1092#1072#1081#1083#1099'|*.obj|'#1042#1089#1077' '#1092#1072#1081#1083#1099'|*.*'
+    Filter = 'OBJ файлы|*.obj|Все файлы|*.*'
     Left = 96
     Top = 48
   end
   object SaveDialog1: TSaveDialog
-    Filter = 'TXT '#1092#1072#1081#1083#1099'|*.txt|CSV '#1092#1072#1081#1083#1099'|*.csv|'#1042#1089#1077' '#1092#1072#1081#1083#1099'|*.*'
+    Filter = 'TXT файлы|*.txt|CSV файлы|*.csv|Все файлы|*.*'
     Left = 144
     Top = 48
   end

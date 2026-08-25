@@ -14910,7 +14910,7 @@ end;
 
 function Int_GetExtensionString: AnsiString;
 var
-	ExtensionCount : GLuint;
+	ExtensionCount : GLint;
   i : Integer;
 begin
   if GL_VERSION_3_0
