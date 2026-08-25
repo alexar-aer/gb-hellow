@@ -1,12 +1,12 @@
 ///<summary>
-/// РњРѕРґСѓР»СЊ uUtils: РЈС‚РёР»РёС‚С‹ РґР»СЏ Р·Р°РіСЂСѓР·РєРё Рё РѕР±СЂР°Р±РѕС‚РєРё РґР°РЅРЅС‹С….
-/// РџСЂРµРґРЅР°Р·РЅР°С‡РµРЅРёРµ: Р§С‚РµРЅРёРµ OBJ С„Р°Р№Р»РѕРІ, РїР°СЂСЃРёРЅРі СЃС‚СЂРѕРє, РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё.
-/// РЎС‚Р°С‚РёСЃС‚РёРєР°:
-///   - РўРёРїС‹: 0
-///   - РљРѕРЅСЃС‚Р°РЅС‚С‹: 0
-///   - РџРµСЂРµРјРµРЅРЅС‹Рµ: 0
-///   - Р¤СѓРЅРєС†РёРё/РџСЂРѕС†РµРґСѓСЂС‹: 4 (LoadOBJ, ParseVector, TrimStr, FileExistsEx)
-///   - РљР»Р°СЃСЃС‹: 0
+/// Модуль uUtils: Утилиты для загрузки и обработки данных.
+/// Предназначение: Чтение OBJ файлов, парсинг строк, вспомогательные функции.
+/// Статистика:
+///   - Типы: 0
+///   - Константы: 0
+///   - Переменные: 0
+///   - Функции/Процедуры: 4 (LoadOBJ, ParseVector, TrimStr, FileExistsEx)
+///   - Классы: 0
 ///</summary>
 unit uUtils;
 
@@ -15,13 +15,13 @@ interface
 uses
   Classes, SysUtils, uTypes;
 
-/// <summary>Р—Р°РіСЂСѓР·РєР° РјРѕРґРµР»Рё РёР· OBJ С„Р°Р№Р»Р°</summary>
+/// <summary>Загрузка модели из OBJ файла</summary>
 function LoadOBJ(const FileName: string; var Vertices: array of TVertex; var Faces: array of TFace): Boolean;
-/// <summary>РџР°СЂСЃРёРЅРі СЃС‚СЂРѕРєРё РІ РІРµРєС‚РѕСЂ</summary>
+/// <summary>Парсинг строки в вектор</summary>
 function ParseVector(const S: string): TVector3;
-/// <summary>РЈРґР°Р»РµРЅРёРµ РїСЂРѕР±РµР»РѕРІ РїРѕ РєСЂР°СЏРј</summary>
+/// <summary>Удаление пробелов по краям</summary>
 function TrimStr(const S: string): string;
-/// <summary>РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ С„Р°Р№Р»Р°</summary>
+/// <summary>Проверка существования файла</summary>
 function FileExistsEx(const FileName: string): Boolean;
 
 implementation
@@ -93,7 +93,7 @@ begin
       
       if Cmd = 'v' then
       begin
-        // РџР°СЂСЃРёРЅРі РІРµСЂС€РёРЅ (СѓРїСЂРѕС‰РµРЅРЅРѕ)
+        // Парсинг вершин (упрощенно)
         if VCount < Length(Vertices) then
         begin
           Vertices[VCount].Pos := ParseVector(Line);
@@ -104,10 +104,10 @@ begin
       end
       else if Cmd = 'f' then
       begin
-        // РџР°СЂСЃРёРЅРі РіСЂР°РЅРµР№ (СѓРїСЂРѕС‰РµРЅРЅРѕ)
+        // Парсинг граней (упрощенно)
         if FCount < Length(Faces) then
         begin
-          // Р—РґРµСЃСЊ РЅСѓР¶РµРЅ РїРѕР»РЅРѕС†РµРЅРЅС‹Р№ РїР°СЂСЃРµСЂ РёРЅРґРµРєСЃРѕРІ
+          // Здесь нужен полноценный парсер индексов
           Inc(FCount);
         end;
       end;
